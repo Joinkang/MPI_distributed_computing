@@ -27,15 +27,15 @@ class_num = 10
 
 if rank != 1:
 
-    # CIFAR-10 데이터셋 로드
+
     (train_images, train_labels), (test_images, test_labels) = cifar10.load_data()
 
     num_class_for_sample = len(train_images)//class_num    
-    # 데이터 전처리: 이미지 픽셀 값을 0~1 범위로 조정
+
     train_images = train_images.astype('float32') / 255.0
     test_images = test_images.astype('float32') / 255.0
 
-    # 레이블을 one-hot 인코딩
+
     train_labels = to_categorical(train_labels, 10)
     test_labels = to_categorical(test_labels, 10)
 
@@ -47,8 +47,6 @@ if rank != 1:
         val_indices += list(range(i*num_class_for_sample + val_indices_range ,(i+1)*num_class_for_sample))
 
     model, optimizer = generate_model()
-
-    # 모델 컴파일
 
     for epoch in range(epochs):   
 
